@@ -3,7 +3,7 @@ import { sveltePreprocess } from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: sveltePreprocess(),
+	preprocess: sveltePreprocess,
 	kit: {
 		adapter: adapter({
 			pages: 'build',
@@ -15,10 +15,7 @@ const config = {
 		paths: {
 			base: process.env.NODE_ENV === 'production' ? '/casys-ai.github.io' : ''
 		},
-		appDir: 'app',
-		files: {
-			assets: 'static'
-		}
+		appDir: '_app'
 	}
 };
 
