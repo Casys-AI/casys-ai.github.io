@@ -15,8 +15,8 @@
             <div class="bg-cassis-100 p-6 rounded-lg shadow-md">
                 <h4 class="text-xl font-bold text-midnight-900 mb-4">Adaptive Artificial Intelligence Layer</h4>
                 <ul class="text-midnight-700 mb-4 list-disc list-inside space-y-2">
-                    <li>Multi-head attention recurrent neural networks for temporal analysis and system dynamics prediction</li>
-                    <li>Multi-agent deep reinforcement learning for distributed optimization and real-time adaptation</li>
+                    <li>Recurrent networks with attention mechanisms for temporal analysis and system dynamics prediction</li>
+                    <li>Multi-agent reinforcement learning for distributed optimization and real-time adaptation</li>
                     <li>Causal inference module based on dynamic Bayesian networks for modeling cause-effect relationships</li>
                 </ul>
             </div>

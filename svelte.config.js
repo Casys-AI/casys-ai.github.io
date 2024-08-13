@@ -6,16 +6,10 @@ const config = {
 	preprocess: sveltePreprocess(),
 	kit: {
 		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
+
 			fallback: '404.html',
-			precompress: false,
-			strict: true
+
 		}),
-		appDir: '_app',
-		paths: {
-			base: process.env.NODE_ENV === 'production' ? '' : '', // Restez sur une base vide si vous êtes à la racine d'un domaine
-		}
 	}
 };
 
