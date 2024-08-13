@@ -4,11 +4,11 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && cp static/CNAME build",
+		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
-		"deploy": "gh-pages -d build"
+		"deploy": "gh-pages -d build --cname www.casys.ai"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.2.2",
