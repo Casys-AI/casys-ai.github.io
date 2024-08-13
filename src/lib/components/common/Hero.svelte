@@ -1,5 +1,12 @@
 <script>
     import { Button } from 'flowbite-svelte';
+
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.scrollIntoView({behavior: 'smooth'});
+        }
+    }
 </script>
 
 <section class="bg-cassis-gradient">
@@ -12,12 +19,16 @@
                 casys.ai is pioneering a new era in system design with our advanced AI platform, designed to model, simulate, and optimize complex adaptive systems at multiple scales. Whether you're planning personal projects or managing large urban networks, our platform adapts and evolves with your needs, ensuring precision and efficiency at every step.
             </p>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-                <Button size="xl" class="bg-pearl-100 hover:bg-pearl-200 text-midnight-900 rounded-none font-mono">
+                <Button class="bg-pearl-100 hover:bg-pearl-200 text-midnight-900 rounded-none font-mono"
+                        on:click={() => scrollToSection('roadmap')}
+                        size="xl">
                     Explore the Roadmap
                 </Button>
                 <Button size="xl" class="bg-pearl-100 hover:bg-pearl-200 text-midnight-900 rounded-none font-mono">
-                    Join the GitHub Repo
+                    <a href="https://github.com/Casys-AI" rel="noopener noreferrer" target="_blank">Join the GitHub
+                        Repo</a>
                 </Button>
+
                 <Button size="xl" class="bg-cassis-800 hover:bg-cassis-900 text-pearl-100 rounded-none font-mono">
                     Watch Demo Videos
                 </Button>
@@ -31,7 +42,11 @@
         </div>
         <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
             <div class="aspect-w-16 aspect-h-9 w-full">
-                <iframe class="w-full h-full rounded-lg shadow-lg" src="https://www.youtube.com/embed/your-video-id" title="Latest Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="w-full h-full rounded-lg shadow-lg"
+                        src="https://www.youtube.com/embed/your-video-id"
+                        title="Latest Video"></iframe>
             </div>
         </div>
     </div>
