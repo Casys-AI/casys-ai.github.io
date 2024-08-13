@@ -3,7 +3,7 @@ import { sveltePreprocess } from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: sveltePreprocess,
+	preprocess: sveltePreprocess(),
 	kit: {
 		adapter: adapter({
 			pages: 'build',
@@ -12,7 +12,10 @@ const config = {
 			precompress: false,
 			strict: true
 		}),
-		appDir: '_app'
+		appDir: '_app',
+		paths: {
+			base: process.env.NODE_ENV === 'production' ? '' : '', // Restez sur une base vide si vous êtes à la racine d'un domaine
+		}
 	}
 };
 
