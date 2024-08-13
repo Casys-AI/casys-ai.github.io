@@ -5,8 +5,9 @@
     import Roadmap from '../lib/components/common/Roadmap.svelte';
     import FaqCta from '../lib/components/common/FaqCta.svelte';
     import Sectors from "$lib/components/sectors/Sectors.svelte";
-    
     import {base} from '$app/paths';
+
+    export const prerender = true;
 </script>
 
 <svelte:head>

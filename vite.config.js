@@ -5,11 +5,7 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	build: {
 		rollupOptions: {
-			output: {
-				manualChunks: {
-					customWorker: ['src/lib/services/custom.worker.js'],
-				},
-			},
+			output: {},
 		},
 	},
 });
