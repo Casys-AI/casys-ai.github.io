@@ -5,7 +5,7 @@
     import Roadmap from '../lib/components/roadmap/Roadmap.svelte';
     import FaqCta from '../lib/components/common/FaqCta.svelte';
     import Sectors from "$lib/components/sectors/Sectors.svelte";
-
+    import "../app.css";
 
     function scrollToSection(sectionId) {
         const section = document.getElementById(sectionId);
@@ -18,7 +18,25 @@
 <svelte:head>
     <title>casys.ai - Transform Your Ideas into Intelligent Systems</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap">
+
+    <!-- Favicon ICO -->
+    <link href="/icons/favicon.ico" rel="icon" type="image/x-icon">
+
+    <!-- Favicon PNG -->
+    <link href="/icons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="/icons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+
+    <!-- Apple Touch Icon -->
+    <link href="/icons/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Android Icons -->
+    <link href="/icons/android-chrome-192x192.png" rel="icon" sizes="192x192">
+    <link href="/icons/android-chrome-512x512.png" rel="icon" sizes="512x512">
+
+    <!-- Manifest -->
+    <link href="/icons/site.webmanifest" rel="manifest">
 </svelte:head>
+
 
 <Navbar let:hidden let:toggle class="bg-pearl-100 border-b border-cassis-200 px-4 sm:px-6 lg:px-8">
     <NavBrand class="flex items-center" href="/">
