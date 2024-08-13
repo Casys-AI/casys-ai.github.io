@@ -2,11 +2,11 @@
     import {Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import Hero from '../lib/components/common/Hero.svelte';
     import Features from '../lib/components/common/Features.svelte';
-    import OpenSource from '../lib/components/common/OpenSource.svelte';
     import Roadmap from '../lib/components/common/Roadmap.svelte';
     import FaqCta from '../lib/components/common/FaqCta.svelte';
     import Sectors from "$lib/components/sectors/Sectors.svelte";
-    import WhatIs from "$lib/components/common/WhatIs.svelte";
+
+    import {base} from '$app/paths';
 </script>
 
 <svelte:head>
@@ -15,22 +15,23 @@
 </svelte:head>
 
 <Navbar let:hidden let:toggle class="bg-pearl-100 border-b border-cassis-200 px-4 sm:px-6 lg:px-8">
-    <NavBrand href="/" class="flex items-center">
+    <NavBrand class="flex items-center" href="{base}/">
         <img src="/images/logo.svg" class="mr-3 h-6 sm:h-8" alt="casys.ai Logo"/>
         <span class="self-center text-xl font-semibold text-midnight-900 font-mono">
             casys.ai
         </span>
     </NavBrand>
     <div class="flex items-center lg:order-2">
-        <a href="/app" class="text-pearl-100 bg-cassis-800 hover:bg-cassis-900 focus:ring-4 focus:ring-cassis-300 font-medium rounded-none text-sm px-6 py-3 mr-2 focus:outline-none font-mono">
+        <a class="text-pearl-100 bg-cassis-800 hover:bg-cassis-900 focus:ring-4 focus:ring-cassis-300 font-medium rounded-none text-sm px-6 py-3 mr-2 focus:outline-none font-mono"
+           href="{base}/app">
             Get Started
         </a>
         <NavHamburger on:click={toggle} class="inline-flex items-center p-2 ml-1 text-sm text-midnight-900 rounded-none lg:hidden hover:bg-pearl-200 focus:outline-none focus:ring-2 focus:ring-cassis-300"/>
     </div>
     <NavUl {hidden} class="lg:flex flex-col lg:flex-row lg:space-x-8 lg:mt-0">
-        <NavLi href="#features" class="text-midnight-900 hover:text-cassis-600 font-mono">Features</NavLi>
-        <NavLi href="#opensource" class="text-midnight-900 hover:text-cassis-600 font-mono">Open Source</NavLi>
-        <NavLi href="#roadmap" class="text-midnight-900 hover:text-cassis-600 font-mono">Roadmap</NavLi>
+        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="{base}#features">Features</NavLi>
+        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="{base}#sectors">Sectors</NavLi>
+        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="{base}#roadmap">Roadmap</NavLi>
         <NavLi href="https://github.com/casys-ai/casys" target="_blank" class="text-midnight-900 hover:text-cassis-600 font-mono">GitHub</NavLi>
     </NavUl>
 </Navbar>
@@ -53,9 +54,9 @@
             <div class="w-full md:w-1/4 mb-4 md:mb-0">
                 <h4 class="text-midnight-900 font-semibold mb-2 font-mono">Useful Links</h4>
                 <ul class="text-midnight-700 font-mono">
-                    <li><a href="/privacy" class="hover:text-cassis-600">Privacy Policy</a></li>
-                    <li><a href="/terms" class="hover:text-cassis-600">Terms of Use</a></li>
-                    <li><a href="/docs" class="hover:text-cassis-600">Documentation</a></li>
+                    <li><a class="hover:text-cassis-600" href="{base}/privacy">Privacy Policy</a></li>
+                    <li><a class="hover:text-cassis-600" href="{base}/terms">Terms of Use</a></li>
+                    <li><a class="hover:text-cassis-600" href="{base}/docs">Documentation</a></li>
                 </ul>
             </div>
             <div class="w-full md:w-1/4 mb-4 md:mb-0">
