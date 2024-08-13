@@ -5,9 +5,7 @@
     import Roadmap from '../lib/components/common/Roadmap.svelte';
     import FaqCta from '../lib/components/common/FaqCta.svelte';
     import Sectors from "$lib/components/sectors/Sectors.svelte";
-    import {base} from '$app/paths';
 
-    export const prerender = true;
 </script>
 
 <svelte:head>
@@ -16,7 +14,7 @@
 </svelte:head>
 
 <Navbar let:hidden let:toggle class="bg-pearl-100 border-b border-cassis-200 px-4 sm:px-6 lg:px-8">
-    <NavBrand class="flex items-center" href="{base}/">
+    <NavBrand class="flex items-center" href="/">
         <img src="/images/logo.svg" class="mr-3 h-6 sm:h-8" alt="casys.ai Logo"/>
         <span class="self-center text-xl font-semibold text-midnight-900 font-mono">
             casys.ai
@@ -24,15 +22,15 @@
     </NavBrand>
     <div class="flex items-center lg:order-2">
         <a class="text-pearl-100 bg-cassis-800 hover:bg-cassis-900 focus:ring-4 focus:ring-cassis-300 font-medium rounded-none text-sm px-6 py-3 mr-2 focus:outline-none font-mono"
-           href="{base}/app">
+           href="/app">
             Get Started
         </a>
         <NavHamburger on:click={toggle} class="inline-flex items-center p-2 ml-1 text-sm text-midnight-900 rounded-none lg:hidden hover:bg-pearl-200 focus:outline-none focus:ring-2 focus:ring-cassis-300"/>
     </div>
     <NavUl {hidden} class="lg:flex flex-col lg:flex-row lg:space-x-8 lg:mt-0">
-        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="{base}#features">Features</NavLi>
-        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="{base}#sectors">Sectors</NavLi>
-        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="{base}#roadmap">Roadmap</NavLi>
+        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="#features">Features</NavLi>
+        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="#sectors">Sectors</NavLi>
+        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="#roadmap">Roadmap</NavLi>
         <NavLi href="https://github.com/casys-ai/casys" target="_blank" class="text-midnight-900 hover:text-cassis-600 font-mono">GitHub</NavLi>
     </NavUl>
 </Navbar>
@@ -55,9 +53,9 @@
             <div class="w-full md:w-1/4 mb-4 md:mb-0">
                 <h4 class="text-midnight-900 font-semibold mb-2 font-mono">Useful Links</h4>
                 <ul class="text-midnight-700 font-mono">
-                    <li><a class="hover:text-cassis-600" href="{base}/privacy">Privacy Policy</a></li>
-                    <li><a class="hover:text-cassis-600" href="{base}/terms">Terms of Use</a></li>
-                    <li><a class="hover:text-cassis-600" href="{base}/docs">Documentation</a></li>
+                    <li><a class="hover:text-cassis-600" href="/privacy">Privacy Policy</a></li>
+                    <li><a class="hover:text-cassis-600" href="/terms">Terms of Use</a></li>
+                    <li><a class="hover:text-cassis-600" href="/docs">Documentation</a></li>
                 </ul>
             </div>
             <div class="w-full md:w-1/4 mb-4 md:mb-0">

@@ -8,14 +8,18 @@ const config = {
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
-			fallback: 'index.html',  // Pas de fallback si toutes les pages sont prérendues
+			fallback: '404.html',
 			precompress: false,
-			strict: true,
+			strict: true
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '' : '',
+			base: process.env.NODE_ENV === 'production' ? '/casys-ai.github.io' : ''
+		},
+		appDir: 'app',
+		files: {
+			assets: 'static'
 		}
-	},
+	}
 };
 
 export default config;
