@@ -1,5 +1,11 @@
 <script>
-    import { BadgeCheckSolid } from 'flowbite-svelte-icons';
+    import {BadgeCheckSolid} from 'flowbite-svelte-icons';
+    import {slide} from 'svelte/transition';
+    import {onMount} from "svelte";
+    import AccordionHeader from "$lib/components/roadmap/AccordionHeader.svelte";
+
+
+
 
     const roadmapData = [
         {
@@ -134,6 +140,41 @@
         }
     ];
 
+    let openIndex = 0;
+    let isMobile = false;
+
+    function handleResize() {
+        isMobile = window.innerWidth < 768;
+        if (!isMobile) {
+            openIndex = -1; // Ouvrir tous les éléments sur desktop
+        } else if (openIndex === -1) {
+            openIndex = 0; // S'assurer que le premier élément est ouvert sur mobile
+        }
+    }
+
+    function toggleAccordion(index) {
+        if (isMobile) {
+            if (openIndex === index) {
+                openIndex = -1;
+            } else {
+                openIndex = index;
+                setTimeout(() => {
+                    const element = document.getElementById(`accordion-${index}`);
+                    if (element) {
+                        const yOffset = -50; // Ajustez cette valeur pour définir la marge en haut
+                        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                        window.scrollTo({top: y, behavior: 'smooth'});
+                    }
+                }, 100); // Un petit délai pour laisser le temps à l'accordéon de s'ouvrir
+            }
+        }
+    }
+
+    onMount(() => {
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    });
 
 </script>
 
@@ -142,37 +183,41 @@
         <h2 class="text-4xl font-extrabold text-midnight-900 mb-12 text-center font-mono">Project Roadmap</h2>
 
         {#each roadmapData as phaseData, index (index)}
-            <div class={`mb-12 p-6 rounded-lg shadow-lg ${index % 2 === 0 ? 'bg-white' : 'bg-pearl-50'} border-l-4 border-cassis-600`}>
-                <h3 class="text-2xl font-bold text-midnight-900 mb-4 font-mono">
-                    {phaseData.phase}
-                </h3>
-                <p class="text-sm text-midnight-700 mb-6">
-                    Duration: {phaseData.duration}
-                </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {#each phaseData.tasks as task}
-                        <div class="flex flex-col justify-between bg-pearl-100 shadow-lg rounded-lg p-6 border border-cassis-300">
-                            <div class="flex items-center mb-4">
-                                <div class="flex-shrink-0 bg-cassis-600 text-pearl-100 p-2 rounded-full">
-                                    <BadgeCheckSolid class="w-8 h-8"/>
-                                </div>
-                                <h4 class="ml-4 text-lg font-semibold text-midnight-900">
-                                    {task.title}
-                                </h4>
-                            </div>
-                            <ul class="mt-2 text-midnight-700 space-y-2 list-disc list-inside">
-                                {#each task.details as detail}
-                                    <li>{detail}</li>
+            <div class={`mb-6 rounded-lg shadow-lg ${index % 2 === 0 ? 'bg-white' : 'bg-pearl-50'} border-l-4 border-cassis-600 overflow-hidden`}>
+                <AccordionHeader
+                        {phaseData}
+                        {index}
+                        {isMobile}
+                        {openIndex}
+                        {toggleAccordion}
+                />
+
+                {#if !isMobile || openIndex === index}
+                    <div transition:slide={{ duration: 300 }} id="content-{index}">
+                        <div class="p-6 pt-0">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {#each phaseData.tasks as task}
+                                    <div class="flex flex-col justify-between bg-pearl-100 shadow-lg rounded-lg p-6 border border-cassis-300">
+                                        <div class="flex items-center mb-4">
+                                            <div class="flex-shrink-0 bg-cassis-600 text-pearl-100 p-2 rounded-full">
+                                                <BadgeCheckSolid class="w-6 h-6"/>
+                                            </div>
+                                            <h4 class="ml-4 text-lg font-semibold text-midnight-900">
+                                                {task.title}
+                                            </h4>
+                                        </div>
+                                        <ul class="mt-2 text-midnight-700 space-y-2 list-disc list-inside">
+                                            {#each task.details as detail}
+                                                <li>{detail}</li>
+                                            {/each}
+                                        </ul>
+                                    </div>
                                 {/each}
-                            </ul>
+                            </div>
                         </div>
-                    {/each}
-                </div>
+                    </div>
+                {/if}
             </div>
         {/each}
     </div>
 </section>
-
-
-
-

@@ -7,7 +7,7 @@
     let userInput = '';
     let chatContainer;
     let showChat = false;
-    let showNotification = true;
+    let showNotification = false;
     let isTyping = false;
 
     const presetQuestions = [
@@ -37,8 +37,7 @@
 
     onMount(() => {
         setTimeout(() => {
-            showNotification = false;
-            showChat = true;
+            showNotification = true;
         }, 3000);
     });
 
@@ -53,6 +52,10 @@
         if (showChat) {
             showNotification = false;
         }
+    }
+
+    function closeNotification() {
+        showNotification = false;
     }
 
     function handleKeydown(event) {
@@ -72,6 +75,7 @@
     .notification {
         background-color: #6E1187;
         color: #FBFBFB;
+        max-width: 350px;
     }
 
     .chat-button {
@@ -94,25 +98,23 @@
     }
 </style>
 
-<section class="fixed bottom-4 right-4 z-50">
+<section class="fixed bottom-4 right-4 z-50 flex flex-col items-end">
     {#if showNotification}
         <div class="notification p-4 rounded-lg shadow-lg mb-4" transition:fade>
-            <p>Hi! Need help understanding casys.ai? Chat with our AI assistant.</p>
+            <div class="flex justify-between items-start">
+                <p class="mr-2">Hi! Need help understanding casys.ai? Chat with our AI assistant.</p>
+                <button on:click={closeNotification} class="text-pearl-50 hover:text-pearl-200 flex-shrink-0"
+                        aria-label="Close notification">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
             <Button size="sm" class="bg-cassis-600 hover:bg-cassis-700 text-pearl-50 mt-2" on:click={toggleChat}>
                 Start Chat
             </Button>
         </div>
-    {/if}
-
-    {#if !showChat}
-        <button
-                class="chat-button"
-                on:click={toggleChat}
-                on:keydown={handleKeydown}
-                aria-label="Open chat"
-        >
-            <img src="/images/logo.svg" alt="Chat icon" width="50" height="50"/>
-        </button>
     {/if}
 
     {#if showChat}
@@ -159,5 +161,14 @@
                 </Button>
             </div>
         </div>
+    {:else}
+        <button
+                class="chat-button"
+                on:click={toggleChat}
+                on:keydown={handleKeydown}
+                aria-label="Open chat"
+        >
+            <img src="/images/logo.svg" alt="Chat icon" width="50" height="50"/>
+        </button>
     {/if}
 </section>

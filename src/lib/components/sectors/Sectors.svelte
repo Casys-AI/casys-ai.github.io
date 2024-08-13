@@ -20,8 +20,8 @@
     <div class="max-w-screen-xl mx-auto px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-cassis-800 text-center mb-8 font-mono">Explore Sectors</h2>
 
-        <div class="grid lg:grid-cols-3 gap-8">
-            <div class="col-span-2 bg-white p-4 rounded-lg shadow-lg">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="order-2 lg:order-1 lg:col-span-2 bg-white p-4 rounded-lg shadow-lg">
                 <Graph
                         {categories}
                         {sectors}
@@ -30,7 +30,9 @@
                 />
             </div>
 
-            <SectorDescription sector={$selectedSectorStore} />
+            <div class="order-1 lg:order-2">
+                <SectorDescription sector={$selectedSectorStore}/>
+            </div>
         </div>
     </div>
 </section>

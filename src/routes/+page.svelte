@@ -2,10 +2,17 @@
     import {Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
     import Hero from '../lib/components/common/Hero.svelte';
     import Features from '../lib/components/common/Features.svelte';
-    import Roadmap from '../lib/components/common/Roadmap.svelte';
+    import Roadmap from '../lib/components/roadmap/Roadmap.svelte';
     import FaqCta from '../lib/components/common/FaqCta.svelte';
     import Sectors from "$lib/components/sectors/Sectors.svelte";
-    import "../app.css";
+
+
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.scrollIntoView({behavior: 'smooth'});
+        }
+    }
 </script>
 
 <svelte:head>
@@ -22,15 +29,21 @@
     </NavBrand>
     <div class="flex items-center lg:order-2">
         <a class="text-pearl-100 bg-cassis-800 hover:bg-cassis-900 focus:ring-4 focus:ring-cassis-300 font-medium rounded-none text-sm px-6 py-3 mr-2 focus:outline-none font-mono"
-           href="/app">
+           href="/">
             Get Started
         </a>
         <NavHamburger on:click={toggle} class="inline-flex items-center p-2 ml-1 text-sm text-midnight-900 rounded-none lg:hidden hover:bg-pearl-200 focus:outline-none focus:ring-2 focus:ring-cassis-300"/>
     </div>
     <NavUl {hidden} class="lg:flex flex-col lg:flex-row lg:space-x-8 lg:mt-0">
-        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="#features">Features</NavLi>
-        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="#sectors">Sectors</NavLi>
-        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="#roadmap">Roadmap</NavLi>
+        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" on:click={() => scrollToSection('features')}>
+            Features
+        </NavLi>
+        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" on:click={() => scrollToSection('sectors')}>
+            Sectors
+        </NavLi>
+        <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" on:click={() => scrollToSection('roadmap')}>
+            Roadmap
+        </NavLi>
         <NavLi class="text-midnight-900 hover:text-cassis-600 font-mono" href="https://github.com/Casys-AI"
                target="_blank">GitHub
         </NavLi>
@@ -38,10 +51,18 @@
 </Navbar>
 
 <main class="bg-pearl-50">
-    <Hero id="hero"/>
-    <Features id="features"/>
-    <Sectors id="sectors"/>
-    <Roadmap id="roadmap"/>
+    <Hero/>
+    <!-- Features.svelte -->
+    <section id="features">
+        <Features/>
+    </section>
+
+    <section id="sectors">
+        <Sectors/>
+    </section>
+    <section id="roadmap">
+        <Roadmap/>
+    </section>
     <FaqCta />
 </main>
 

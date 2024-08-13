@@ -7,12 +7,21 @@
     export let links = [];
 
     const dispatch = createEventDispatcher();
+    let width;
+    let height;
+    let svg;
+    let container;
 
     function initGraph() {
-        const width = 900;
-        const height = 600;
+        if (!container) return;
 
-        const svg = d3.select('#graph')
+        const rect = container.getBoundingClientRect();
+        width = rect.width;
+        height = rect.height;
+
+        d3.select('#graph').selectAll('*').remove();
+
+        svg = d3.select('#graph')
             .attr('width', width)
             .attr('height', height);
 
@@ -38,10 +47,10 @@
             .enter()
             .append('g')
             .call(drag(simulation))
-            .on('click', (event, d) => dispatch('selectSector', d));
+            .on('click', handleClick);
 
         // Add logo SVG to each node
-        node.each(function (d) {
+        node.each(function () {
             d3.select(this)
                 .append('image')
                 .attr('href', '/images/logo.svg')
@@ -101,21 +110,58 @@
                 .on('drag', dragged)
                 .on('end', dragended);
         }
+
+        function handleClick(event, d) {
+            // Effet de clic : augmenter temporairement la taille du nœud
+            const clickedNode = d3.select(this);
+            clickedNode.select('image')
+                .transition()
+                .duration(200)
+                .attr('width', 60)
+                .attr('height', 60)
+                .attr('x', -30)
+                .attr('y', -30)
+                .transition()
+                .duration(200)
+                .attr('width', 50)
+                .attr('height', 50)
+                .attr('x', -25)
+                .attr('y', -25);
+
+            // Dispatch l'événement de sélection
+            dispatch('selectSector', d);
+        }
+    }
+
+    function handleResize() {
+        initGraph();
     }
 
     onMount(() => {
         initGraph();
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     });
 </script>
 
-<svg id="graph"></svg>
+<div bind:this={container} class="graph-container">
+    <svg id="graph"></svg>
+</div>
 
 <style>
-    #graph {
+    .graph-container {
+        width: 100%;
+        height: 600px;
         background-color: #FBFBFB;
         border: 1px solid #D7D7D7;
         border-radius: 10px;
+        overflow: hidden;
+    }
+
+    #graph {
         width: 100%;
-        height: 600px;
+        height: 100%;
     }
 </style>
